@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blueoakcapital.co/sitemap.xml
