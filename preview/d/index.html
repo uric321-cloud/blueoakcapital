@@ -61,7 +61,9 @@ p{margin:0}
 .util .cbtn:hover{background:var(--oak);color:#fff}
 
 /* header (over hero) */
-.hdr{position:absolute;top:40px;left:0;right:0;z-index:50;color:#fff}
+.hdr{position:absolute;top:40px;left:0;right:0;z-index:50;color:#fff;transition:background .25s,box-shadow .25s}
+.hdr.stuck{position:fixed;top:0;background:var(--navy);box-shadow:0 2px 14px rgba(11,37,69,.25)}
+.hdr.stuck .wrap{height:64px}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:92px}
 .brand{display:flex;flex-direction:column;line-height:1}
 .brand b{font-size:24px;font-weight:800;letter-spacing:-.03em}
@@ -74,15 +76,18 @@ p{margin:0}
 .burger{display:none;background:none;border:2px solid rgba(255,255,255,.6);color:#fff;padding:8px 12px;font:700 13px var(--font)}
 
 /* hero */
-.hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--navy)}
-.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(.75)}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(11,37,69,.9) 0%,rgba(11,37,69,.7) 45%,rgba(11,37,69,.45) 100%)}
-.hero::after{content:"";position:absolute;right:0;bottom:0;z-index:2;width:180px;height:110px;background:#fff;clip-path:polygon(100% 0,100% 100%,0 100%)}
-.hero .wrap{position:relative;z-index:2;padding-top:140px;padding-bottom:120px}
-.hero h1{color:#fff;max-width:900px}
-.hero .lead{color:#DCE3EE;max-width:640px;margin-top:28px;font-size:19px}
-.hero .actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
-.hero .marks{margin-top:64px;display:flex;flex-wrap:wrap;gap:12px 32px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:#B8C4D6;text-transform:uppercase}
+.hero{position:relative;min-height:86vh;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--navy) repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 16px)}
+.hero .photo{position:absolute;top:0;right:0;bottom:0;width:50%;clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
+.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.9)}
+.hero .photo::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,37,69,.55) 0%,rgba(11,37,69,0) 32%)}
+.hero::after{content:"";position:absolute;right:0;bottom:0;z-index:3;width:180px;height:110px;background:#fff;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-top:160px;padding-bottom:110px}
+.hero .text{max-width:540px}
+.hero h1{color:#fff;font-size:clamp(44px,6.2vw,88px)}
+.hero h1 span{color:var(--oak)}
+.hero .lead{color:#DCE3EE;max-width:520px;margin-top:26px;font-size:18px}
+.hero .actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap}
+.hero .marks{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 28px;font-size:12px;font-weight:600;letter-spacing:.04em;color:#B8C4D6;text-transform:uppercase;max-width:560px}
 .hero .marks span::before{content:"";display:inline-block;width:8px;height:8px;background:var(--oak);margin-right:10px;vertical-align:1px}
 
 /* framed photo */
@@ -105,9 +110,11 @@ p{margin:0}
 .wwd .head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:48px}
 .wwd .head .lead{justify-self:end}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.tile{background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.tile{background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;position:relative;transition:transform .2s,box-shadow .2s}
+.tile::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--oak);transform:scaleX(0);transform-origin:left;transition:transform .25s;z-index:1}
+.tile:hover::before{transform:scaleX(1)}
 .tile:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(11,37,69,.10)}
-.tile img{aspect-ratio:4/3;object-fit:cover;width:100%;filter:saturate(.8)}
+.tile img{aspect-ratio:16/11;object-fit:cover;width:100%;filter:saturate(.8)}
 .tile .body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
 .tile .n{font-size:12px;font-weight:700;color:var(--oak);letter-spacing:.1em;margin-bottom:10px}
 .tile h3{font-size:19px}
@@ -126,7 +133,7 @@ p{margin:0}
 .steps p{font-size:14px;color:#4B5563;margin-top:8px;line-height:1.55}
 
 /* stats band */
-.band{background:var(--navy);color:#fff;padding:96px 0}
+.band{background:var(--navy) repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 16px);color:#fff;padding:96px 0}
 .band .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
 .band h2{color:#fff}
 .band .lead{color:#B8C4D6;margin-top:20px}
@@ -145,7 +152,7 @@ p{margin:0}
 .partner .lead{max-width:640px;margin:18px auto 0}
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;text-align:left}
 .trio div{padding:0 8px}
-.trio svg{width:56px;height:56px;stroke:var(--navy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.trio svg{width:72px;height:72px;padding:14px;background:var(--panel);stroke:var(--navy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .trio h3{margin-top:22px}
 .trio p{margin-top:12px;font-size:15px;color:#4B5563}
 .trio .textlink{margin-top:18px}
@@ -210,6 +217,12 @@ p{margin:0}
 .ftr .credit{font-size:11.5px;color:#6E7F99;margin-top:16px}
 
 @media (max-width:1100px){
+  .hero{min-height:0;display:block}
+  .hero .photo{position:relative;width:100%;height:360px;clip-path:none}
+  .hero .photo::before{background:linear-gradient(180deg,rgba(11,37,69,.6) 0%,rgba(11,37,69,0) 40%)}
+  .hero .wrap{padding-top:64px;padding-bottom:72px}
+  .hero .text{max-width:640px}
+  .hero::after{display:none}
   .tiles{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:repeat(3,1fr);row-gap:24px}
   .steps div:nth-child(3n){border-right:0}
@@ -234,9 +247,8 @@ p{margin:0}
 @media (max-width:640px){
   :root{--g:20px}
   .sect{padding:72px 0}
-  .hero{min-height:0}
-  .hero .wrap{padding-top:120px;padding-bottom:96px}
-  .hero::after{width:120px;height:70px}
+  .hero .wrap{padding-top:48px;padding-bottom:56px}
+  .hero .photo{height:260px}
   .hdr .wrap{height:76px}
   .hdr.open .nav{top:76px}
   .brand b{font-size:20px}
@@ -281,16 +293,18 @@ p{margin:0}
 </header>
 
 <section class="hero">
-  <img class="bg" src="https://images.unsplash.com/photo-1768926968986-a88590ce5025?auto=format&fit=crop&w=2400&q=80" alt="">
+  <div class="photo"><img src="https://images.unsplash.com/photo-1580532224583-df27f865580b?auto=format&fit=crop&w=1800&h=1500&q=80" alt="U.S. Air Force C-17 Globemaster III on approach"></div>
   <div class="wrap">
-    <h1>Supply. Build. Sustain.</h1>
-    <p class="lead">Blueoak Capital is a diversified supplier and contractor delivering mission-critical material, facilities and services to the U.S. Government and its partners across the Middle East.</p>
-    <div class="actions">
-      <a class="btn" href="#what-we-do">What we do</a>
-      <a class="btn outline" href="#connect">Request a quote</a>
-    </div>
-    <div class="marks">
-      <span>SAM.gov registered</span><span>DLA DIBBS vendor</span><span>PIEE / WAWF enrolled</span><span>U.S. small business</span>
+    <div class="text">
+      <h1>Supply. Build. <span>Sustain.</span></h1>
+      <p class="lead">Blueoak Capital is a diversified supplier and contractor delivering mission-critical material, facilities and services to the U.S. Government and its partners across the Middle East.</p>
+      <div class="actions">
+        <a class="btn" href="#what-we-do">What we do</a>
+        <a class="btn outline" href="#connect">Request a quote</a>
+      </div>
+      <div class="marks">
+        <span>SAM.gov registered</span><span>DLA DIBBS vendor</span><span>PIEE / WAWF enrolled</span><span>U.S. small business</span>
+      </div>
     </div>
   </div>
 </section>
@@ -346,7 +360,7 @@ p{margin:0}
         <div class="body"><span class="n">05</span><h3>Environmental &amp; Site Services</h3><p>Earthworks and site preparation, demolition support, remediation support, waste handling and site restoration.</p><span class="textlink">Learn more →</span></div>
       </a>
       <a class="tile" href="/services/base-operations/">
-        <img src="https://images.unsplash.com/photo-1679871215166-c8cdc5ed9025?auto=format&fit=crop&w=800&h=600&q=80" alt="Low barracks building on an installation">
+        <img src="https://images.unsplash.com/photo-1748256086767-8974ee677f77?auto=format&fit=crop&w=800&h=600&q=80" alt="Technician checking installed equipment against documentation">
         <div class="body"><span class="n">06</span><h3>Base Operations &amp; Maintenance</h3><p>Facility operations and maintenance, life-support and camp services, spares programs and recurring consumables.</p><span class="textlink">Learn more →</span></div>
       </a>
       <a class="tile" href="/services/disaster-contingency/">
@@ -537,9 +551,12 @@ p{margin:0}
       <p>© 2026 Blueoak Capital LLC. Blueoak Capital is an independent supplier and contractor and is not affiliated with or endorsed by any U.S. Government agency.</p>
       <ul><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms</a></li><li><a href="/accessibility/">Accessibility</a></li></ul>
     </div>
-    <p class="credit">Photography: Wasif Ali, Ronnakorn Triraganon, david Griffiths, CHUTTERSNAP, Jose Manuel Esp, T, Iain, Marc Brianvil, Angga Pratama, ThisisEngineering, Valerie V, Nick Fewings, Alireza Hashemi, Olga Subach, david hili, Ricardo Gomez Angel, Gary Walker-Jones, via Unsplash.</p>
+    <p class="credit">Photography: Nick Morales, Ronnakorn Triraganon, david Griffiths, CHUTTERSNAP, Jose Manuel Esp, T, Iain, TECNIC Bioprocess Solutions, Angga Pratama, ThisisEngineering, Valerie V, Nick Fewings, Alireza Hashemi, Olga Subach, david hili, Ricardo Gomez Angel, Gary Walker-Jones, via Unsplash.</p>
   </div>
 </footer>
 
+<script>
+(function(){var h=document.getElementById('hdr');function f(){h.classList.toggle('stuck',window.scrollY>140);}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
 </body>
 </html>
